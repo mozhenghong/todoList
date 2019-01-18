@@ -2,9 +2,9 @@
   <el-collapse v-model="activeNames" @change="handleChange">
       <button @click="changeData">click me</button>
     <el-collapse-item title="完成事项" name="xxx">
-      <div v-for='content in completeEventList' v-bind:key='content.content' class="complete">
+      <div v-for='list in completeEventList' v-bind:key='list.content' class="complete">
         <input type="checkbox" class="checkbox">
-        <p class="content">{{content.content}}</p>
+        <p class="content">{{list.content}}</p>
         <el-row>
           <el-button class="remove" type="danger" icon="el-icon-delete" circle  @click='remove'></el-button>
         </el-row>
@@ -31,13 +31,8 @@ export default {
   },
   methods: {
     remove(){
-
-    },
-    handleChange() {},
-    changeData() {
-        this.completeEventList.push({
-            content: 'I am additional data'
-        });
+        this.index = this.completeEventList.indexOf(this.list.content)
+        this.completeEventList.splice(index,1)
     }
   }
 };
