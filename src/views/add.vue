@@ -1,7 +1,7 @@
 <template>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
         <el-form-item label="添加todo">
-            <el-input v-model="formInline.user" placeholder="添加todo" @change="onChange"></el-input>
+            <el-input v-model="formInline.user" placeholder="添加todo"></el-input>
         </el-form-item>
         <el-form-item>
             <el-button type="primary" v-on:click="onSubmit">添加</el-button>
@@ -19,12 +19,10 @@
       }
     },
     methods: {
-      onChange(e) {
-        console.log(1, e);
-      },
       onSubmit() {
         console.log(this.formInline.user)
         this.$emit('addList', this.formInline.user);
+        this.formInline.user=''
       }
     }
   }

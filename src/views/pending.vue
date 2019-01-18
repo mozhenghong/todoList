@@ -1,11 +1,11 @@
 <template>
-    <el-collapse v-model="activeNames" @change="handleChange">
+    <el-collapse v-model="activeNames">
         <el-collapse-item title="待办事项" name="1">
           <div class="pending" v-for="list in pendingList" :key="list.content">
-            <input type="checkbox" class="checkbox" >
+            <input type="checkbox" class="checkbox" @change='changed(list)'>
             <p class="content">{{list.content}}</p>
             <el-row>
-                <el-button class="rrmove" type="danger" icon="el-icon-delete" circle></el-button>
+                <el-button class="remove" type="danger" icon="el-icon-delete" circle @click="remove(list)"></el-button>
             </el-row>
           </div>
         </el-collapse-item>
@@ -23,12 +23,17 @@
             
         },
         methods: {
-            handleChange(val) {
-                console.log(val);
+            remove(list){
+                let index=this.pendingList.indexOf(list)
+                this.pendingList.splice(index,1)
+            },
+            changed(list){
+                console.log(list)
+                this.$emit('pending-to-complete', list)
             }
         },
         created(){
-            console.log('pending',this.pendingList)
+            // console.log('pending',this.pendingList)
         },
     }
 </script>
@@ -45,6 +50,9 @@
 }
 .content{
     font-size:16px;
+}
+.active{
+
 }
 </style>
 

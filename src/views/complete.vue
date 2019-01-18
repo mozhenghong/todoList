@@ -1,7 +1,7 @@
 <template>
   <el-collapse v-model="activeNames" >
     <el-collapse-item title="完成事项" name="xxx">
-      <div v-for='list in completeEventList' v-bind:key='list.content' class="complete">
+      <div v-for='list in completeList' v-bind:key='list.content' class="complete">
         <input type="checkbox" class="checkbox">
         <p class="content">{{list.content}}</p>
         <el-row>
@@ -13,18 +13,10 @@
 </template>
 <script>
 export default {
+  props: ['completeList'],
   data() {
     return {
-      activeNames: ["rrr"],
-      completeEventList: [
-        {
-          content: "content"
-        },
-        {
-           content: "remove"
-        }
-
-      ]
+      activeNames: ["2"],
 
     };
   },
@@ -33,8 +25,8 @@ export default {
   },
   methods: {
     remove(list){
-        let index = this.completeEventList.indexOf(list)
-        this.completeEventList.splice(index,1)
+        let index = this.completeList.indexOf(list)
+        this.completeList.splice(index,1)
     }
   }
 };
