@@ -1,5 +1,6 @@
 <template>
   <el-collapse v-model="activeNames" @change="handleChange">
+      <button @click="changeData">click me</button>
     <el-collapse-item title="完成事项" name="xxx">
       <div v-for='content in completeEventList' v-bind:key='content.content' class="complete">
         <input type="checkbox" class="checkbox">
@@ -16,6 +17,7 @@ export default {
   data() {
     return {
       activeNames: ["rrr"],
+      // 记住：所有的 UI 都是 根据数据进行改变，当你的数据更改的时候，你的 UI 将会进行改变
       completeEventList: [
         {
           content: "content"
@@ -30,6 +32,12 @@ export default {
   methods: {
     remove(){
 
+    },
+    handleChange() {},
+    changeData() {
+        this.completeEventList.push({
+            content: 'I am additional data'
+        });
     }
   }
 };
