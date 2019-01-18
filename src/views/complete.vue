@@ -1,11 +1,11 @@
 <template>
-  <el-collapse v-model="activeNames" @change="handleChange">
+  <el-collapse v-model="activeNames" >
     <el-collapse-item title="完成事项" name="xxx">
       <div v-for='list in completeEventList' v-bind:key='list.content' class="complete">
         <input type="checkbox" class="checkbox">
         <p class="content">{{list.content}}</p>
         <el-row>
-          <el-button class="remove" type="danger" icon="el-icon-delete" circle  @click='remove'></el-button>
+          <el-button class="remove" type="danger" icon="el-icon-delete" circle  @click='remove(list)'></el-button>
         </el-row>
       </div>
     </el-collapse-item>
@@ -19,7 +19,11 @@ export default {
       completeEventList: [
         {
           content: "content"
+        },
+        {
+           content: "remove"
         }
+
       ]
 
     };
@@ -28,8 +32,8 @@ export default {
     
   },
   methods: {
-    remove(){
-        this.index = this.completeEventList.indexOf(this.list.content)
+    remove(list){
+        let index = this.completeEventList.indexOf(list)
         this.completeEventList.splice(index,1)
     }
   }
