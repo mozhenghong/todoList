@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <add v-on:addList="onSubmit('xxxx')"/>
-    <pending />
+    <add v-on:addList="onSubmit"/>
+    <pending :pendingList="todoList" />
     <complete />
   </div>
 </template>
@@ -22,13 +22,17 @@ export default {
     return {
       value1: true,
       value2: true,
-      todoList: ''
+      todoList: [
+        {content: 'xxx'},
+        {content: 'yyy'}
+      ]
     };
   },
   methods: {
    onSubmit(xxx) {
       this.todoList = xxx;
-      console.log(this.todoList)
+      console.log(xxx)
+      console.log('x',this.todoList)
     }
   }
 };
