@@ -13,12 +13,12 @@
 </template>
 <script>
     export default {
-        props: ['yyy'],
+        props: ['pendingList'],
         data() {
             return {
                 activeNames: ['1'],
                 lists:[
-                    {content:''},
+                    {content:this.pendingList},
                 ]
             };
         },

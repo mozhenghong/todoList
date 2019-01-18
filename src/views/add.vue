@@ -13,7 +13,7 @@
     data() {
       return {
         formInline: {
-          user: '',
+          user: 'XXX',
           region: ''
         }
       }
@@ -23,8 +23,7 @@
         console.log(1, e);
       },
       onSubmit() {
-        console.log(this.formInline.user);
-        this.$emit('enlarge-text', this.formInline.user);
+        this.$emit('addList', this.formInline.user);
       }
     }
   }

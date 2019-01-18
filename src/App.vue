@@ -1,15 +1,12 @@
 <template>
   <div id="app">
-    <add v-on:enlarge-text="xxx"/>
-    <pending yyy=zzz />
+    <add v-on:addList="onSubmit('xxxx')"/>
+    <pending />
     <complete />
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import Home from './views/Home'
-// import About from './views/About'
 import add from "./views/add";
 import complete from "./views/complete";
 import pending from "./views/pending";
@@ -25,13 +22,13 @@ export default {
     return {
       value1: true,
       value2: true,
-      zzz: 'init',
+      todoList: ''
     };
   },
   methods: {
-    xxx(xxx) {
-      console.log("xxx", xxx);
-      this.zzz = xxx;
+   onSubmit(xxx) {
+      this.todoList = xxx;
+      console.log(this.todoList)
     }
   }
 };
