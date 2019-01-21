@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <add v-on:addList="onSubmit"/>
-    <el-badge :value="pendingValue()" :max="99" class="item"></el-badge>
+    <el-badge :value="pendingValue()" :max="20" class="item"></el-badge>
     <pending :pendingList="todoList"  v-on:pending-to-complete="addComplete" />
-    <el-badge :value="completeValue()" :max="99" class="item"></el-badge>
+    <el-badge :value="completeValue()" :max="20" class="item"></el-badge>
     <complete :completeList ="completeEventList" v-on:toPending="addPending"/>
   </div>
 </template>
@@ -59,6 +59,12 @@ export default {
 <style>
 .item {
   margin-top: 10px;
-  margin-left: 95%;
+  margin-left:95vw;
+  transition: all 2s;
+  animation: breath 0.5s infinite alternate;
+}
+@keyframes breath{
+  0%{transform: scale(1) }
+  100%{transform: scale(1.2)}
 }
 </style>
