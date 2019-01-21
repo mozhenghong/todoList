@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <add v-on:addList="onSubmit"/>
+    <el-badge :value="pendingValue()" :max="99" class="item"></el-badge>
     <pending :pendingList="todoList"  v-on:pending-to-complete="addComplete" />
-    <complete :completeList ="completeEventList"/>
+    <el-badge :value="completeValue()" :max="99" class="item"></el-badge>
+    <complete :completeList ="completeEventList" v-on:toPending="addPending"/>
   </div>
 </template>
 
@@ -23,35 +25,40 @@ export default {
       value1: true,
       value2: true,
       todoList: [
-        {content: 'xxx'},
-        {content: 'yyy'}
+       
       ],
        completeEventList: [
-        {
-          content: "content"
-        },
-        {
-           content: "remove"
-        }
-
+    
       ]
     };
   },
   methods: {
     onSubmit(xxx) {
-      // this.todoList = xxx;
-      console.log('xxx',xxx)
       this.todoList.unshift({content: xxx})
-      // console.log('x',this.todoList)
     },
     addComplete(complete){
       let index = this.todoList.indexOf(complete)
       this.todoList.splice(index,1)
       this.completeEventList.unshift(complete)
+    },
+    addPending(pending){
+      this.todoList.unshift(pending)
+      let index = this.completeEventList.indexOf(pending)
+      this.completeEventList.splice(index,1)
+    },
+    pendingValue(){
+      return this.todoList.length
+    },
+    completeValue(){
+      return this.completeEventList.length
     }
   }
 };
 </script>
 
 <style>
+.item {
+  margin-top: 10px;
+  margin-left: 95%;
+}
 </style>

@@ -1,12 +1,12 @@
 <template>
-    <el-form :inline="true" :model="formInline" class="demo-form-inline">
-        <el-form-item label="添加todo">
-            <el-input v-model="formInline.user" placeholder="添加todo"></el-input>
-        </el-form-item>
-        <el-form-item>
-            <el-button type="primary" v-on:click="onSubmit">添加</el-button>
-        </el-form-item>
-    </el-form>
+   <div class="add">
+    <label>添加todo:
+      <input v-model="formInline.user" placeholder="添加todo" class="addInput" @keyup.enter="onSubmit">
+    </label>
+    <el-row  class="addButton">
+      <el-button plain　v-on:click="onSubmit">添加</el-button>
+    </el-row>
+   </div>
 </template>
 <script>
   export default {
@@ -20,10 +20,24 @@
     },
     methods: {
       onSubmit() {
-        console.log(this.formInline.user)
         this.$emit('addList', this.formInline.user);
         this.formInline.user=''
       }
     }
   }
 </script>
+<style>
+.add{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+}
+.addInput{
+  font-size: 17px;
+  padding: 6px 0;
+}
+.addButton{
+  margin-left: 20px;
+}
+</style>

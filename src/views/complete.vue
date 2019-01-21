@@ -2,10 +2,10 @@
   <el-collapse v-model="activeNames" >
     <el-collapse-item title="完成事项" name="xxx">
       <div v-for='list in completeList' v-bind:key='list.content' class="complete">
-        <input type="checkbox" class="checkbox">
+        <input type="checkbox" class="checkbox" checked @change='changed(list)'>
         <p class="content">{{list.content}}</p>
         <el-row>
-          <el-button class="remove" type="danger" icon="el-icon-delete" circle  @click='remove(list)'></el-button>
+          <el-button size="small" class="remove" type="primary"  plain icon="el-icon-delete" circle  @click='remove(list)'></el-button>
         </el-row>
       </div>
     </el-collapse-item>
@@ -27,6 +27,9 @@ export default {
     remove(list){
         let index = this.completeList.indexOf(list)
         this.completeList.splice(index,1)
+    },
+    changed(list){
+      this.$emit('toPending',list)
     }
   }
 };
@@ -39,8 +42,8 @@ export default {
     align-items: center;
 }
 .checkbox{
-    width: 20px;
-    height: 20px;     
+    width: 16px;
+    height: 16px;     
 }
 .content{
     font-size:16px;

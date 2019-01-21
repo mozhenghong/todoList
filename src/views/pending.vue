@@ -5,7 +5,7 @@
             <input type="checkbox" class="checkbox" @change='changed(list)'>
             <p class="content">{{list.content}}</p>
             <el-row>
-                <el-button class="remove" type="danger" icon="el-icon-delete" circle @click="remove(list)"></el-button>
+                <el-button size="small" class="remove" type="primary" plain icon="el-icon-delete" circle @click="remove(list)"></el-button>
             </el-row>
           </div>
         </el-collapse-item>
@@ -45,14 +45,11 @@
     align-items: center;
 }
 .checkbox{
-    width: 20px;
-    height: 20px;     
+    width: 16px;
+    height: 16px;     
 }
 .content{
     font-size:16px;
-}
-.active{
-
 }
 </style>
 
