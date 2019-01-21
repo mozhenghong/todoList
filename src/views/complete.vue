@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     remove(list){
+      console.log(this.completeList)
         let index = this.completeList.indexOf(list)
         this.completeList.splice(index,1)
     },

@@ -12,6 +12,8 @@
 import add from "./views/add";
 import complete from "./views/complete";
 import pending from "./views/pending";
+import pendingLocalStore from "./pendingLocalStorage.js"
+import completeLocalStore from "./completeLocalStorage.js"
 
 export default {
   name: "app",
@@ -22,14 +24,8 @@ export default {
   },
   data() {
     return {
-      value1: true,
-      value2: true,
-      todoList: [
-       
-      ],
-       completeEventList: [
-    
-      ]
+      todoList: pendingLocalStore.fetch(),
+      completeEventList: completeLocalStore.fetch()
     };
   },
   methods: {
@@ -51,6 +47,20 @@ export default {
     },
     completeValue(){
       return this.completeEventList.length
+    }
+  },
+  watch:{
+    todoList:{
+      handler: function(todoList){
+        pendingLocalStore.save(todoList)
+      },
+      deep: true
+    },
+    completeEventList:{
+      handler: function(completeEventList){
+       completeLocalStore.save(completeEventList)
+      },
+      deep: true
     }
   }
 };
