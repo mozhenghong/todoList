@@ -24,6 +24,7 @@
         },
         methods: {
             remove(list){
+                alert('你要删除这个计划吗？')
                 let index=this.pendingList.indexOf(list)
                 this.pendingList.splice(index,1)
             },

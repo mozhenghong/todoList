@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     remove(list){
-      console.log(this.completeList)
+        alert('你要删除这个计划吗？')
         let index = this.completeList.indexOf(list)
         this.completeList.splice(index,1)
     },
