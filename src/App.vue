@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <add v-on:addList="onSubmit"/>
-    <el-badge :value="pendingValue()" :max="20" class="item"></el-badge>
+    <el-badge :value="1" :max="20" class="item"></el-badge>
     <pending :pendingList="todoList"  v-on:pending-to-complete="addComplete" />
-    <el-badge :value="completeValue()" :max="20" class="item"></el-badge>
+    <el-badge :value="1" :max="20" class="item"></el-badge>
     <complete :completeList ="completeEventList" v-on:toPending="addPending"/>
   </div>
 </template>
@@ -14,23 +14,28 @@ import complete from "./views/complete";
 import pending from "./views/pending";
 import pendingLocalStore from "./pendingLocalStorage.js"
 import completeLocalStore from "./completeLocalStorage.js"
+import Leancloud from "./leancloud.js"
+import leancloud from './leancloud.js';
 
 export default {
   name: "app",
   components: {
     add,
     complete,
-    pending
+    pending,
   },
   data() {
     return {
-      todoList: pendingLocalStore.fetch(),
+  
+      todoList: Leancloud.getList('pendingList'),
       completeEventList: completeLocalStore.fetch()
     };
   },
   methods: {
     onSubmit(xxx) {
-      this.todoList.unshift({content: xxx})
+      console.log( Leancloud.getList('pendingList'))
+      Leancloud.add('pendingList',xxx)
+      // this.todoList.unshift({content: xxx})
     },
     addComplete(complete){
       let index = this.todoList.indexOf(complete)
@@ -50,18 +55,18 @@ export default {
     }
   },
   watch:{
-    todoList:{
-      handler: function(todoList){
-        pendingLocalStore.save(todoList)
-      },
-      deep: true
-    },
-    completeEventList:{
-      handler: function(completeEventList){
-       completeLocalStore.save(completeEventList)
-      },
-      deep: true
-    }
+    // todoList:{
+    //   handler: function(todoList){
+    //     pendingLocalStore.save(todoList)
+    //   },
+    //   deep: true
+    // },
+    // completeEventList:{
+    //   handler: function(completeEventList){
+    //    completeLocalStore.save(completeEventList)
+    //   },
+    //   deep: true
+    // }
   }
 };
 </script>
