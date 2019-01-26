@@ -7,7 +7,7 @@ AV.init({
   appKey: APP_KEY
 });
 
-function add(addType, addContent) {
+// function add(addType, addContent) {
   // addType -> 
   // addContent -> 
 
@@ -15,40 +15,47 @@ function add(addType, addContent) {
 
   // return response
 
+// }
+
+// function remove() {}
+
+// function modify() {}
+
+// function getList() {}
+
+function add(listName,listContent){
+  var TestObject = AV.Object.extend(listName);
+  var testObject = new TestObject();
+  testObject.save({
+   listName: listContent
+  })  
 }
 
-function remove() {}
-
-function modify() {}
-
-function getList() {}
-
-export default{
- add(listName,listContent){
-    var TestObject = AV.Object.extend(listName);
-    var testObject = new TestObject();
-    testObject.save({
-     [listName]: listContent
-    })  
-  },
-  getList(listName){
-    let query = new AV.Query(listName);
-    query.find().then(function (listName) {
-      let array=listName.map(item=>item.attributes)
-      let list=[]
-      array.forEach(item=>{
-        list.push(item.listName)
-      })
-      return list
+function getList(xxx){ // params
+  let query = new AV.Query(xxx);
+  return query.find().then(function (yyy) { // response
+    let array=yyy.map(item => {
+      let obj = {}
+      obj.key = item.attributes
+      obj.id = item.id
+      return obj
     })
-    // var query2 = new AV.Query('completeList');
-    // query2.find().then(function (completeList) {
-    //   let array2=completeList.map(item=>item.attributes)
-    //   let completeEventList=[]
-    //   array2.forEach(item=>{
-    //     completeEventList.push(item.completeEventList)
-    //   })
-    //   console.log("test2",completeEventList)
-    // })
-  }
+    let list=[]
+    array.forEach(item=>{
+      list.push(item)
+    })
+    return list
+  }) 
+}
+function remove(name,complete){
+  var todo = AV.Object.createWithoutData(name, complete.id);
+  todo.destroy()
+  // .then(function () {
+    // 删除成功
+  // });
+}
+export default{
+  add,
+  getList,
+  remove
 }

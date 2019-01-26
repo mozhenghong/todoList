@@ -1,9 +1,9 @@
 <template>
     <el-collapse v-model="activeNames">
         <el-collapse-item title="待办事项" name="1">
-          <div class="pending" v-for="list in pendingList" :key="list.content">
+          <div class="pending" v-for="list in pendingList" :key="list.id">
             <input type="checkbox" class="checkbox" @change='changed(list)'>
-            <p class="content">{{list.content}}</p>
+            <p class="content">{{list.key.listName}}</p>
             <el-row>
                 <el-button size="small" class="remove" type="primary" plain icon="el-icon-delete" circle @click="remove(list)"></el-button>
             </el-row>
@@ -25,16 +25,13 @@
         methods: {
             remove(list){
                 alert('你要删除这个计划吗？')
-                let index=this.pendingList.indexOf(list)
-                this.pendingList.splice(index,1)
+                this.$emit('removeList2', list)
+                // let index=this.pendingList.indexOf(list)
+                // this.pendingList.splice(index,1)
             },
             changed(list){
-                console.log(list)
                 this.$emit('pending-to-complete', list)
             }
-        },
-        created(){
-            // console.log('pending',this.pendingList)
         },
     }
 </script>
