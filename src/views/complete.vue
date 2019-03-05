@@ -1,9 +1,9 @@
 <template>
   <el-collapse v-model="activeNames" >
     <el-collapse-item title="完成事项" name="xxx">
-      <div v-for='list in completeList' v-bind:key='list.id' class="complete">
+      <div v-for='list in completeList' v-bind:key='list.content' class="complete">
         <input type="checkbox" class="checkbox" checked @change='changed(list)'>
-        <p class="content">{{list.key.listName}}</p>
+        <p class="content">{{list.content}}</p>
         <el-row>
           <el-button size="small" class="remove" type="primary"  plain icon="el-icon-delete" circle  @click='remove(list)'></el-button>
         </el-row>
@@ -17,7 +17,6 @@ export default {
   data() {
     return {
       activeNames: ["2"],
-
     };
   },
   components: {
@@ -26,9 +25,8 @@ export default {
   methods: {
     remove(list){
         alert('你要删除这个计划吗？')
-        this.$emit('removeList',list)
-        // let index = this.completeList.indexOf(list)
-        // this.completeList.splice(index,1)
+        let index = this.completeList.indexOf(list)
+        this.completeList.splice(index,1)
     },
     changed(list){
       this.$emit('toPending',list)
@@ -51,4 +49,3 @@ export default {
     font-size:16px;
 }
 </style>
-
