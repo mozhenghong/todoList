@@ -100,20 +100,20 @@ export default {
       })
     }
   },
-  watch:{
-    // todoList:{
-    //   handler: function(todoList){
-    //     pendingLocalStore.save(todoList)
-    //   },
-    //   deep: true
-    // },
-    // completeEventList:{
-    //   handler: function(completeEventList){
-    //    completeLocalStore.save(completeEventList)
-    //   },
-    //   deep: true
-    // }
-  }
+  // watch:{
+  //   todoList:{
+  //     handler: function(todoList){
+  //       pendingLocalStore.save(todoList)
+  //     },
+  //     deep: true
+  //   },
+  //   completeEventList:{
+  //     handler: function(completeEventList){
+  //      completeLocalStore.save(completeEventList)
+  //     },
+  //     deep: true
+  //   }
+  // }
 };
 </script>
 
